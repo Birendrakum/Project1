@@ -6,8 +6,8 @@ Resources:
     Type: AWS::EC2::VPC
     Properties:
       CidrBlock: "192.168.10.0/24"
-      EnableDnsHostnames: true
-      EnableDnsSupport: true
+      EnableDnsHostnames: true   # Every EC2 gets a default hostname based on its private IP
+      EnableDnsSupport: true     # AWS runs a DNS resolver in your VPC
       Tags:
         - Key: Name
           Value: MyVPC
@@ -92,6 +92,10 @@ Resources:
 
   InternetGateway:
     Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: MyInternetGateway
   
   InternetGatewayAttachment:
     Type: AWS::EC2::VPCGatewayAttachment
@@ -109,6 +113,10 @@ Resources:
 
   MyEIP:
     Type: AWS::EC2::EIP
+    Properties:
+      Tags:
+        - Key: Name
+          Value: EIP
     
   NatGateway:
     Type: AWS::EC2::NatGateway
